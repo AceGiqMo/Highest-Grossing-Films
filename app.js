@@ -3,7 +3,7 @@
 // - Supports: search, country filter, year range, and click-to-sort
 // - Renders both a table and a responsive "card view"
 
-const DATA_URL = "./data/films.json";
+const DATA_URL = "./films.json";
 
 /** @typedef {{ id:number, title:string, release_year:number|null, director:string|null, box_office:string|null, country:string|null, box_office_numeric:number|null }} Film */
 
