@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Highest Grossing Films</title>
+    <meta
+      name="description"
+      content="Browse highest-grossing films with sorting and filtering."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true"></div>
+
+    <header class="header">
+      <div class="container">
+        <div class="header__top">
+          <div>
+            <h1 class="title">Highest Grossing Films</h1>
+            <p class="subtitle">
+              A searchable, sortable view of films exported from
+              <code>highest_grossing_films.db</code>.
+            </p>
+          </div>
+
+          <div class="pill" id="summaryPill" aria-live="polite">Loading…</div>
+        </div>
+
+        <section class="controls" aria-label="Filters and sorting">
+          <div class="control">
+            <label for="q" class="control__label">Search</label>
+            <input
+              id="q"
+              class="control__input"
+              type="search"
+              placeholder="Title or director…"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="control">
+            <label for="country" class="control__label">Country</label>
+            <select id="country" class="control__input"></select>
+          </div>
+
+          <div class="control">
+            <label for="yearMin" class="control__label">Year (min)</label>
+            <input
+              id="yearMin"
+              class="control__input"
+              type="number"
+              inputmode="numeric"
+              placeholder="e.g., 1990"
+            />
+          </div>
+
+          <div class="control">
+            <label for="yearMax" class="control__label">Year (max)</label>
+            <input
+              id="yearMax"
+              class="control__input"
+              type="number"
+              inputmode="numeric"
+              placeholder="e.g., 2025"
+            />
+          </div>
+
+          <div class="control control--actions">
+            <button id="reset" class="btn" type="button">Reset</button>
+            <button id="toggleView" class="btn btn--secondary" type="button">
+              Card view
+            </button>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel" aria-label="Films table">
+        <div class="panel__header">
+          <h2 class="panel__title">Films</h2>
+          <p class="panel__hint">
+            Tip: click a column header to sort.
+          </p>
+        </div>
+
+        <div class="tableWrap" id="tableWrap">
+          <table class="table" id="filmsTable">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <button class="thBtn" data-sort="title" type="button">
+                    Title <span class="sortIcon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="colYear">
+                  <button class="thBtn" data-sort="release_year" type="button">
+                    Year <span class="sortIcon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button class="thBtn" data-sort="director" type="button">
+                    Director <span class="sortIcon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col">
+                  <button class="thBtn" data-sort="box_office" type="button">
+                    Box office <span class="sortIcon" aria-hidden="true"></span>
+                  </button>
+                </th>
+                <th scope="col" class="colCountry">
+                  <button class="thBtn" data-sort="country" type="button">
+                    Country <span class="sortIcon" aria-hidden="true"></span>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="filmsTbody">
+              <tr>
+                <td colspan="5" class="loadingRow">Loading data…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cards" id="cards" hidden></div>
+
+        <div class="panel__footer">
+          <span class="muted" id="statusText"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span class="muted">
+          Data source: exported from SQLite → JSON (local file).
+        </span>
+      </div>
+    </footer>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
